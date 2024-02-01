@@ -1,0 +1,157 @@
+{
+  "name": "pinpointff",
+  "displayName": "PinPoint Files & Folders",
+  "description": "",
+  "version": "0.0.3",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pinpointff.pinFile",
+        "title": "Pin File"
+      },
+      {
+        "command": "pinpointff.pinFolder",
+        "title": "Pin Folder"
+      },
+      {
+        "command": "pinpointff.unpinFile",
+        "title": "Unpin File",
+        "icon": "$(search-remove)"
+      },
+      {
+        "command": "pinpointff.unpinFolder",
+        "title": "Unpin Folder",
+        "icon": "$(search-remove)"
+      },
+      {
+        "command": "pinpointff.unpinAll",
+        "title": "Unpin All",
+        "icon": "$(debug-console-clear-all)"
+      },
+      {
+        "command": "pinpointff.openFile",
+        "title": "Open File"
+      },
+      {
+        "command": "pinpointff.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "pinpointff.copyRelativePath",
+        "title": "Copy Relative Path"
+      },
+      {
+        "command": "pinpointff.deleteFile",
+        "title": "Delete"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "pinpointff",
+          "name": "PinPoint Files & Folders",
+          "when": "explorerViewletVisible",
+          "contextualTitle": "PinPoint Files & Folders",
+          "icon": "$(timeline-unpin)"
+        }
+      ]
+    },
+    "menus": {
+      "editor/title/context": [
+        {
+          "command": "pinpointff.pinFile",
+          "group": "3_preview"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "pinpointff.pinFile",
+          "when": "resourceScheme == file && !explorerResourceIsFolder"
+        },
+        {
+          "command": "pinpointff.pinFolder",
+          "when": "resourceScheme == file && explorerResourceIsFolder"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "pinpointff.unpinFile",
+          "when": "viewItem == pinnedFile",
+          "group": "inline"
+        },
+        {
+          "command": "pinpointff.unpinFile",
+          "when": "viewItem == pinnedFile"
+        },
+        {
+          "command": "pinpointff.unpinFolder",
+          "when": "viewItem == pinnedFolder",
+          "group": "inline"
+        },
+        {
+          "command": "pinpointff.unpinFolder",
+          "when": "viewItem == pinnedFolder"
+        },
+        {
+          "command": "pinpointff.pinFile",
+          "when": "viewItem == file"
+        },
+        {
+          "command": "pinpointff.pinFolder",
+          "when": "viewItem == folder"
+        },
+        {
+          "command": "pinpointff.copyRelativePath",
+          "group": "5_copy",
+          "when": "viewItem == file || viewItem == folder || viewItem == pinnedFile || viewItem == pinnedFolder"
+        },
+        {
+          "command": "pinpointff.deleteFile",
+          "group": "1_actions",
+          "when": "viewItem == file || viewItem == folder || viewItem == pinnedFile || viewItem == pinnedFolder"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "pinpointff.refresh",
+          "when": "view == pinpointff",
+          "group": "navigation"
+        },
+        {
+          "command": "pinpointff.unpinAll",
+          "when": "view == pinpointff",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.86.0",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2",
+    "@vscode/test-electron": "^2.3.4"
+  }
+}
